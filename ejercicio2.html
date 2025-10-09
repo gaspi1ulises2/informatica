@@ -2,38 +2,54 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Formulario de Bienvenida</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promedio de Notas</title>
 </head>
 <body>
-    <h1>Registro de Estudiante</h1>
+    <h1>Cálculo del Promedio</h1>
 
     <form id="formulario">
-        Nombre: <input type="text" id="nombre"><br><br>
-        Apellido: <input type="text" id="apellido"><br><br>
-        Curso: <input type="text" id="curso"><br><br>
-        <button type="submit">Enviar</button>
+        <label>Nota 1:</label>
+        <input type="number" id="nota1" min="0" max="10"><br><br>
+
+        <label>Nota 2:</label>
+        <input type="number" id="nota2" min="0" max="10"><br><br>
+
+        <label>Nota 3:</label>
+        <input type="number" id="nota3" min="0" max="10"><br><br>
+
+        <button type="button" onclick="calcularPromedio()">Calcular Promedio</button>
     </form>
 
+    <p id="resultado"></p>
+
     <script>
-        document.getElementById("formulario").addEventListener("submit", function(event) {
-            event.preventDefault();
+        function calcularPromedio() {
+            // Capturar los valores de las tres notas
+            let n1 = parseFloat(document.getElementById("nota1").value);
+            let n2 = parseFloat(document.getElementById("nota2").value);
+            let n3 = parseFloat(document.getElementById("nota3").value);
 
-            let nombre = document.getElementById("nombre").value.trim();
-            let apellido = document.getElementById("apellido").value.trim();
-            let curso = document.getElementById("curso").value.trim();
-
-            if (!nombre || !apellido || !curso) {
-                alert("Por favor completa todos los campos.");
+            // Validar que se ingresaron las tres notas
+            if (isNaN(n1) || isNaN(n2) || isNaN(n3)) {
+                alert("Por favor, ingresa las tres notas.");
                 return;
             }
 
-            // Abrir nueva ventana simple
-            let nuevaVentana = window.open("", "_blank");
+            // Calcular promedio
+            let promedio = (n1 + n2 + n3) / 3;
+            let mensaje = `Tu promedio es ${promedio.toFixed(2)}. `;
 
-            nuevaVentana.document.write("<h1>¡Bienvenido/a, " + nombre + " " + apellido + "!</h1>");
-            nuevaVentana.document.write("<p>Te registraste correctamente en el curso <b>" + curso + "</b>.</p>");
-            nuevaVentana.document.write("<button onclick='window.close()'>Cerrar</button>");
-        });
+            // Determinar si aprueba o no (supongamos que aprueba con 6 o más)
+            if (promedio >= 6) {
+                mensaje += "¡Aprobaste! 🎉";
+            } else {
+                mensaje += "Necesitás repasar. 📚";
+            }
+
+            // Mostrar el resultado en pantalla
+            document.getElementById("resultado").innerText = mensaje;
+        }
     </script>
 </body>
 </html>
