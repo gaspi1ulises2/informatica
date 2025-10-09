@@ -1,0 +1,65 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Estudiante</title>
+</head>
+<body>
+    <h1>Registro de Estudiante</h1>
+
+    <form id="formulario" onsubmit="return false;">
+        <label>Nombre:</label>
+        <input type="text" id="nombre"><br><br>
+
+        <label>Apellido:</label>
+        <input type="text" id="apellido"><br><br>
+
+        <label>Curso:</label>
+        <input type="text" id="curso"><br><br>
+
+        <button id="btnEnviar">Enviar</button>
+    </form>
+
+    <script>
+        document.getElementById("btnEnviar").addEventListener("click", function() {
+            const nombre = document.getElementById("nombre").value.trim();
+            const apellido = document.getElementById("apellido").value.trim();
+            const curso = document.getElementById("curso").value.trim();
+
+            if (!nombre || !apellido || !curso) {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+
+            // Abrir ventana dentro del evento click (evita bloqueo en Chrome)
+            const nuevaVentana = window.open("", "_blank");
+
+            if (!nuevaVentana) {
+                alert("Tu navegador bloqueó la ventana emergente. Activa pop-ups para este sitio.");
+                return;
+            }
+
+            // Contenido de la nueva pestaña
+            nuevaVentana.document.write(`
+                <html>
+                <head>
+                    <title>Bienvenida</title>
+                    <style>
+                        body { font-family: Arial; text-align: center; background: #f0f8ff; margin-top: 80px; }
+                        h1 { color: #0077b6; }
+                        p { font-size: 18px; }
+                        button { padding: 10px 20px; background: #0077b6; color: white; border: none; border-radius: 5px; cursor: pointer; }
+                    </style>
+                </head>
+                <body>
+                    <h1>¡Bienvenido/a, ${nombre} ${apellido}! 🎉</h1>
+                    <p>Te registraste correctamente en el curso <strong>${curso}</strong>.</p>
+                    <button onclick="window.close()">Cerrar</button>
+                </body>
+                </html>
+            `);
+
+            nuevaVentana.document.close();
+        });
+    </script>
+</body>
+</html>
