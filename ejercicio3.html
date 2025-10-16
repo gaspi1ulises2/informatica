@@ -1,49 +1,38 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro de Estudiante</title>
+    <title>Formulario de Bienvenida</title>
 </head>
 <body>
     <h1>Registro de Estudiante</h1>
 
-    <form id="formulario" onsubmit="return false;">
-        <label>Nombre:</label>
-        <input type="text" id="nombre"><br><br>
-
-        <label>Apellido:</label>
-        <input type="text" id="apellido"><br><br>
-
-        <label>Curso:</label>
-        <input type="text" id="curso"><br><br>
-
-        <button id="btnEnviar">Enviar</button>
+    <form id="formulario">
+        Nombre: <input type="text" id="nombre"><br><br>
+        Apellido: <input type="text" id="apellido"><br><br>
+        Curso: <input type="text" id="curso"><br><br>
+        <button type="submit">Enviar</button>
     </form>
 
     <script>
-        document.getElementById("btnEnviar").addEventListener("click", function() {
-            const nombre = document.getElementById("nombre").value.trim();
-            const apellido = document.getElementById("apellido").value.trim();
-            const curso = document.getElementById("curso").value.trim();
+        document.getElementById("formulario").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let nombre = document.getElementById("nombre").value.trim();
+            let apellido = document.getElementById("apellido").value.trim();
+            let curso = document.getElementById("curso").value.trim();
 
             if (!nombre || !apellido || !curso) {
-                alert("Por favor, completa todos los campos.");
+                alert("Por favor completa todos los campos.");
                 return;
             }
 
-            // Abrir ventana dentro del evento click (evita bloqueo en Chrome)
-            const nuevaVentana = window.open("", "_blank");
+            // Abrir nueva ventana simple
+            let nuevaVentana = window.open("", "_blank");
 
-            if (!nuevaVentana) {
-                alert("Tu navegador bloqueó la ventana emergente. Activa pop-ups para este sitio.");
-                return;
-            }
-
-            // Contenido de la nueva pestaña
-            nuevaVentana.document.write(
-                
-            );
-
-            nuevaVentana.document.close();
+            nuevaVentana.document.write("<h1>¡Bienvenido/a, " + nombre + " " + apellido + "!</h1>");
+            nuevaVentana.document.write("<p>Te registraste correctamente en el curso <b>" + curso + "</b>.</p>");
+            nuevaVentana.document.write("<button onclick='window.close()'>Cerrar</button>");
         });
     </script>
 </body>
