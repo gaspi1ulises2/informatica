@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Adivinanza</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Juego de Adivinanza </h1>
+    <button id="jugar">Jugar</button>
+    <p id="resultado"></p>
+
+    <script>
+        const botonJugar = document.getElementById("jugar");
+        const resultado = document.getElementById("resultado");
+
+        // Definir el número secreto (puedes cambiarlo)
+        const numeroSecreto = 7;
+
+        botonJugar.addEventListener("click", () => {
+            // Pedir al usuario que adivine el número
+            let intento = prompt("Adivina el número secreto (entre 1 y 10):");
+
+            // Convertir la entrada a número
+            intento = Number(intento);
+
+            // Validar la entrada
+            if (isNaN(intento) || intento < 1 || intento > 10) {
+                resultado.textContent = " Por favor, ingresa un número válido entre 1 y 10.";
+                resultado.style.color = "orange";
+                return;
+            }
+
+            // Comparar con el número secreto
+            if (intento === numeroSecreto) {
+                resultado.textContent = " ¡Acertaste! El número secreto era " + numeroSecreto + ".";
+                resultado.style.color = "green";
+            } else {
+                resultado.textContent = " No acertaste. El número secreto era " + numeroSecreto + ".";
+                resultado.style.color = "red";
+            }
+        });
+    </script>
+
+</body>
+</html>

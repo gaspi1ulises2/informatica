@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar edad</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 25px;
+            font-size: 1.2rem;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Verificador de edad</h1>
+    <button id="verificar">Verificar edad</button>
+    <p id="mensaje"></p>
+
+    <script>
+        // Obtener los elementos
+        const boton = document.getElementById("verificar");
+        const mensaje = document.getElementById("mensaje");
+
+        boton.addEventListener("click", () => {
+            // Pedir edad con prompt
+            let edad = prompt("Por favor, ingresa tu edad:");
+
+            // Convertir a número
+            edad = Number(edad);
+
+            // Validar que sea un número válido
+            if (isNaN(edad) || edad <= 0) {
+                mensaje.textContent = "⚠️ Por favor, ingresa una edad válida.";
+                mensaje.style.color = "orange";
+                return;
+            }
+
+            // Condicional para verificar acceso
+            if (edad >= 18) {
+                mensaje.textContent = "✅ Acceso permitido. Eres mayor de edad.";
+                mensaje.style.color = "green";
+            } else {
+                mensaje.textContent = "❌ Acceso denegado. Eres menor de edad.";
+                mensaje.style.color = "red";
+            }
+        });
+    </script>
+
+</body>
+</html>
